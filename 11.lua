@@ -20,7 +20,36 @@ local grid = [[08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48]]
 
 local matrix = {}
-local count = 1
+local n = string.gmatch(grid, "%d+")
 
-for val in string.gmatch(grid, "%d+") do
+for i = 1, 20, 1 do
+	matrix[i] = {}
+	for j = 1, 20, 1 do
+		local num = tonumber(n())
+		table.insert(matrix[i], num)
+	end
 end
+
+local ret = 0
+local dirs = { { 0, 1 }, { 1, 0 }, { 1, 1 }, { 1, -1 } }
+
+local function getVal(x, y)
+	if x > 20 or x < 1 or y > 20 or y < 1 then
+		return 0
+	end
+	return matrix[x][y]
+end
+
+for i = 1, 20, 1 do
+	for j = 1, 20, 1 do
+		for _, dir in pairs(dirs) do
+			local val = 1
+			for m = 0, 3, 1 do
+				val = val * getVal(i + dir[1] * m, j + dir[2] * m)
+			end
+			ret = math.max(val, ret)
+		end
+	end
+end
+
+print(ret)
