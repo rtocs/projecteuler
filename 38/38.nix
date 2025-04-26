@@ -23,10 +23,6 @@ let
 		( if containsAllDigits str  then (fromJSON str)
 		else makePandigitalNum (str + toString ( num * curr ) ) num (curr + 1));
 
-
-
-
-	# nix does not have tail call elimination nix
 	biggestPandigitalNumInRange =  curr : end : maxVal : if curr > end then maxVal else (
 		let 
 			pan = (makePandigitalNum (toString curr) curr 2);
