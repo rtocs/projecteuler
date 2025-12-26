@@ -13,5 +13,5 @@ pub fn main() !void {
         }
         res = @mod(res + curr_num, 10000000000);
     }
-    std.debug.print("{d}", .{res});
+    std.debug.print("{}\n", .{res});
 }
